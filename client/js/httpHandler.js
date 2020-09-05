@@ -2,39 +2,16 @@
 
   const serverUrl = 'http://127.0.0.1:3000';
 
-  //
-  // TODO: build the swim command fetcher here
-  //
-
-
-  const ajaxSwim = () => {
+ window.ajaxSwim = () => {
     $.ajax({
       type: 'GET',
       url: serverUrl, //url of database
       success: (res) => (SwimTeam.move(res)), //console.log('success!');
-      complete: () => setTimeout(ajaxSwim, 2000)
-      //add error message
+      complete: () => setTimeout(ajaxSwim, 5000)
     });
   };
 
-  ajaxSwim();
-
-  // $(document).ready(function() {
-  //   setInterval(ajaxSwim, 5000);
-  // });
-
-
-  // $('.pool').on('click', function(e) {
-  //   console.log('You are most certainly clicking!');
-  //   ajaxSwim();
-  // });
-
-  // $(document).ready(function() {
-  //   setInterval(ajaxSwim, 5000);
-  // });
-
-
-
+  setInterval(ajaxSwim, 1000);
 
 
   /////////////////////////////////////////////////////////////////////
