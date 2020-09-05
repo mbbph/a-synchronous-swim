@@ -7,11 +7,11 @@
       type: 'GET',
       url: serverUrl, //url of database
       success: (res) => (SwimTeam.move(res)), //console.log('success!');
-      complete: () => setTimeout(ajaxSwim, 5000)
+      complete: () => setTimeout(ajaxSwim, 100)
     });
   };
 
-  setInterval(ajaxSwim, 1000);
+  setTimeout(ajaxSwim, 0);
 
 
   /////////////////////////////////////////////////////////////////////

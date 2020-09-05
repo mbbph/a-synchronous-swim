@@ -1,11 +1,10 @@
-
-
+const queue = require('./js/messageQueue');
 
 const keypressHandler = require('./js/keypressHandler');
-keypressHandler.initialize(message => console.log(`Message received: ${message}`));
+keypressHandler.initialize(queue.enqueue); //pass in callback that takes a message and pushes it onto the queue
 
 const httpHandler = require('./js/httpHandler');
-
+httpHandler.initialize(queue);
 
 const http = require('http');
 const server = http.createServer(httpHandler.router);
