@@ -17,7 +17,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: 'FILL_ME_IN', //url of database
       cache: false,
       contentType: false,
       processData: false,

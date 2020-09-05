@@ -1,5 +1,5 @@
 const _ = require('underscore');
-const keypress = require('keypress');
+const keypress = require('keypress'); //keypress library
 
 ///////////////////////////////////////////////////////////////////////////////
 // Utility Function ///////////////////////////////////////////////////////////
@@ -8,7 +8,7 @@ const keypress = require('keypress');
 const validMessages = ['left', 'right', 'up', 'down'];
 const mappedChars = { space: ' ' }; // special mappings
 
-const isValidMessage = (message) => {
+const isValidMessage = (message) => { //check if a command is valid?
   return _.contains(validMessages, message);
 };
 
@@ -24,10 +24,9 @@ const logKeypress = (key) => {
 // Keypress Handler ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-var message = ''; // a buffer to collect key presses
+module.exports.message = ''; // a buffer to collect key presses
 
 module.exports.initialize = (callback) => {
-
   // setup an event handler on standard input
   process.stdin.on('keypress', (chunk, key) => {
     // ctrl+c should quit the program
@@ -40,7 +39,7 @@ module.exports.initialize = (callback) => {
       callback(key.name);
       return; // don't do any more processing on this key
     }
-    
+
     // otherwise build up a message from individual characters
     if (key && (key.name === 'return' || key.name === 'enter')) {
       // on enter, process the message
