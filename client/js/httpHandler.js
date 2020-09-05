@@ -6,6 +6,37 @@
   // TODO: build the swim command fetcher here
   //
 
+
+  const ajaxSwim = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl, //url of database
+      success: (res) => (SwimTeam.move(res)), //console.log('success!');
+      complete: () => setTimeout(ajaxSwim, 2000)
+      //add error message
+    });
+  };
+
+  ajaxSwim();
+
+  // $(document).ready(function() {
+  //   setInterval(ajaxSwim, 5000);
+  // });
+
+
+  // $('.pool').on('click', function(e) {
+  //   console.log('You are most certainly clicking!');
+  //   ajaxSwim();
+  // });
+
+  // $(document).ready(function() {
+  //   setInterval(ajaxSwim, 5000);
+  // });
+
+
+
+
+
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
   // Note: remember to fix the URL below.

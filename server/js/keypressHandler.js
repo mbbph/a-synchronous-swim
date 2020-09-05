@@ -1,5 +1,6 @@
 const _ = require('underscore');
 const keypress = require('keypress'); //keypress library
+const messageQueue = require('./messageQueue');
 
 ///////////////////////////////////////////////////////////////////////////////
 // Utility Function ///////////////////////////////////////////////////////////
@@ -24,7 +25,7 @@ const logKeypress = (key) => {
 // Keypress Handler ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-module.exports.message = ''; // a buffer to collect key presses
+var message = ''; // a buffer to collect key presses
 
 module.exports.initialize = (callback) => {
   // setup an event handler on standard input
@@ -36,6 +37,7 @@ module.exports.initialize = (callback) => {
 
     // check to see if the keypress itself is a valid message
     if (isValidMessage(key.name)) {
+      messageQueue.enqueue(key.name);
       callback(key.name);
       return; // don't do any more processing on this key
     }
@@ -46,6 +48,9 @@ module.exports.initialize = (callback) => {
       logKeypress('\n');
       if (message.length > 0) {
         callback(message);
+        if (isValidMessage(key.name)) {
+          messageQueue.enqueue(key.name);
+        }
         message = ''; // clear the buffer where we are collecting keystrokes
       }
     } else {
