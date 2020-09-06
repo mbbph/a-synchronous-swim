@@ -17,10 +17,14 @@ module.exports.router = (req, res, next = ()=>{}) => {
 
   if (req.method === "GET" && req.url === '/') {
     res.writeHead(200, headers);
-    //res.end(generateRandom());
     res.end(messageQueue.dequeue());
     next();
-  } else {
+  } else if (req.url === '/missing.jpg') {
+    res.writeHead(404, headers);
+    res.end();
+    next();
+  }
+    else {
     res.writeHead(200, headers);
     res.end();
     next(); // invoke next() at the end of a request to help with testing!
@@ -29,7 +33,7 @@ module.exports.router = (req, res, next = ()=>{}) => {
 
 
 //generate a random swim command
-var generateRandom = () => {
+module.exports.generateRandom = () => {
   var commands = ['up', 'down', 'left', 'right'];
   var x = Math.floor(Math.random() * 4);
   return commands[x];
